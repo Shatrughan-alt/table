@@ -37,14 +37,6 @@ app.post("/create",async(req,res)=>{
     res.json({ success: true, message: "data save successfully",data:data });
 })
 
-// update
-app.put("/update",async(req,res)=>{
-    console.log(req.body);
-    const {_id,...rest}=req.body;
-    console.log(rest);
-    const data=await userModel.updateOne({_id:_id},rest);
-    res.send({ success: true, message: "data updated successfully", data: data });
-})
 
 // delete
 app.delete("/delete/:id",async(req,res)=>{
