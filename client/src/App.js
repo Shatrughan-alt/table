@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 
 import { useEffect, useState } from 'react';
@@ -9,18 +9,12 @@ axios.defaults.baseURL="http://localhost:8080/"
 function App() {
 
 const [add,setAdd]=useState(false);
-const [editSection,setEditSection]=useState(false);
 const [data,setData]=useState({
   name:"",
   email:"",
   mobile:"",
 })
-  const [dataEdit, setEditData] = useState({
-    name: "",
-    email: "",
-    mobile: "",
-    id:""
-  })
+ 
 
 const [listData,setListData]=useState([]);
 
@@ -77,30 +71,10 @@ const handleChange=(e)=>{
   }
 
 
-  const handleUpdate=async(e)=>{
-    e.preventDefault();
-    const data1=await axios.put("/update",dataEdit)
-    if(data1.data.success){
-      getData();
-      alert(data1.data.message);
-      setEditSection(false);
-    }
-  }
+ 
 
-  const handleEdit=async(e)=>{
-    const {value,name}=e.target;
-    setEditData((prev)=>{
-      return{
-        ...prev,
-        [name]:value
-      }
-    })
-  }
-
-  const handleEditData=async(value)=>{
-    setEditData(value);
-    setEditSection(true);
-  }
+ 
+  
 
   return (
     <>
@@ -118,16 +92,7 @@ const handleChange=(e)=>{
           )
 }
 
-{
-          editSection && (
-            <Form
-              handleChange={handleEdit}
-              handleSubmit={handleUpdate}
-              handleclose={() => setEditSection(false)}
-              rest={dataEdit}
-            />
-          )
-}
+
         
         <div className="tableContainer">
           <table>
@@ -149,7 +114,7 @@ const handleChange=(e)=>{
                       <td>{value.email}</td>
                       <td>{value.mobile}</td>
                       <td>
-                        <button className='btn btn-edit' onClick={()=>handleEditData(value)}>Edit</button>
+                        
                         <button className='btn btn-delete' onClick={() => { handleDelete(value._id)}}>Delete</button>
                       </td>
                     </tr>
